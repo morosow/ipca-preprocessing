@@ -17,18 +17,18 @@ components = 3
 
 # Only three components is not good idea, but i have huge dataset and after preprocessing my data also can be large.
 
-for chunk in pd.read_csv ('train.tar.gz', compression = 'gzip', sep = ';', header = 0, quotechar = '"', chunksize = chunk_size):
-    labels = chunk.iloc [:, 2]
-    selected_features = chunk.iloc [:, [3:16]]
-    
-    scaled_features = StandardScaler (). fit_transform (selected_features)
-    
-    ipca = IncrementalPCA (n_components = components)
-    principalComponents = ipca.fit_transform (scaled_features)
-    preprocessed_data = pd.DataFrame (data = principalComponents)
-    
-    merged_data = pd.concat ([preprocessed_data, labels], axis = 1)
-    
-    merged_data.to_csv ('preprocessed_data.csv', mode = 'w', sep = ';', header = 0)
+for chunk in pd.read_csv('train.tar.gz', compression='gzip', sep=';', header=0, quotechar='"', chunksize=chunk_size):
+    labels = chunk.iloc[:, 2]
+    selected_features = chunk.iloc[:, [3:16]]
+
+    scaled_features = StandardScaler().fit_transform(selected_features)
+
+    ipca = IncrementalPCA(n_components=components)
+    principalComponents = ipca.fit_transform(scaled_features)
+    preprocessed_data = pd.DataFrame(data=principalComponents)
+
+    merged_data = pd.concat([preprocessed_data, labels], axis=1)
+
+    merged_data.to_csv('preprocessed_data.csv', mode='w', sep=';', header=0)
 
 # P.S. Of course chunksize and number of components depends on your available computer resources.
