@@ -4,7 +4,7 @@ import codecs
 input_filename = 'input.csv'
 output_filename = 'output.csv'
 
-df = pd.read_csv(input_filename, sep = ';', skip_blank_lines=True, error_bad_lines=False)
+df = pd.read_csv(input_filename, sep = ';', header=0, skip_blank_lines=True, error_bad_lines=False)
 
 df.index = range(0, len(df.index))
 
